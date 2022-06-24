@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="index"
+>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+<div layout:fragment="content" >
+    <div class="container mt-5 px-2">
+        <div class="table-responsive">
+            <h1 class="text-center" >Liste des Offres</h1>
+            <table class="table table-responsive table-borderless text-center">
+                <thead>
+                <tr class="bg-light">
+                    <th scope="col" width="5%">id</th>
+                    <th scope="col" width="25%">Titre</th>
+                    <th scope="col" width="20%">Domaine</th>
+                    <th scope="col" width="10%">Date</th>
+                    <th scope="col" width="20%">Poster</th>
+                    <th scope="col" width="15%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="offre: ${list_offres}" >
+                    <td th:text="${offre.id}">  </td>
+                    <td th:text="${offre.titre}"> </td>
+                    <td th:text="${offre.domaine}"></td>
+                    <td ><i class="fa fa-check-circle-o green"></i><span class="ms-1" th:text="${#dates.format(offre.date_publication, 'dd-MMM-yyyy')}"></span></td>
+                    <td th:text="${offre.poster.name}">  </td>
+                    <td><a th:href="@{/admin/delete(id=${offre.id})}"   class="btn btn-danger">  Delete Offre</a></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

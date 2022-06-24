@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.com"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="index">
+<head>
+
+
+</head>
+<body>
+
+    <div layout:fragment="content" >
+        <div class="container">
+            <div class="text-center mb-5 " >
+                <a th:href="@{/add_offre}" class="col-md-12 ancre " >+ Ajouter une offre</a>
+            </div>
+            <div class="row">
+
+                <div th:each="offre:${offres}" class="col-xm-12 col-sm-6 col-lg-4 mb-4">
+                    <div class="card-i card-margin">
+                        <div class="card-header no-border">
+                            <h3 class="card-title text-center h4 m-0" th:text="${offre.domaine}" ></h3>
+                        </div>
+                        <div class="card-body py-2 px-4">
+                            <div class="solu_title">
+                                <h3 class="text-secondary m-0" th:text="${offre.titre}" ></h3>
+                            </div>
+                            <div class="solu_descriptin">
+                                <span class="text-secondary" th:text="${offre.description}" ></span>
+                            </div>
+                            <div class="footer-card">
+                                <div class="">
+                                    <span class="pub-date" >  Publié le [[ ${offre.date_publication} ]]  </span>
+                                </div>
+                                <div class="">
+                                    <a th:href="@{/offre/show(id=${offre.id})}" class="btn btn-sm btn-flash-border-primary col">plus</a>
+                                </div>
+                            </div>
+                            <div class="widget-49-meeting-action">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

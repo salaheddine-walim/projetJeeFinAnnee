@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="index"
+>
+<head>
+    <title>Detail Offre</title>
+</head>
+<body>
+<div layout:fragment="content" >
+    <div class="container p-4 ">
+        <div class="row">
+            <div class="m-auto   col-6">
+                <div class="card-i card-margin">
+                    <div class="card-header no-border">
+                        <h2 class="card-title text-center my-3 h4 m-0" th:text="${offre.domaine}" ></h2>
+                    </div>
+                    <div class="card-body py-4 px-4 text-center">
+                        <div class="solu_title mb-4 ">
+                            <h1 class="text-secondary m-auto mb-5" th:text="${ offre.titre}" ></h1>
+                        </div>
+                        <div class="">
+                            <div class="">
+                                <p class="text-bold">
+                                    <i class="fas fa-user"></i> Publié par :[[${offre.poster.name} ]]
+                                </p>
+                                <p class="pub-date" >
+                                    <i class="fas fa-calendar"></i> Publié  le  [[${#dates.format(offre.date_publication, 'dd-MMM-yyyy')}]]
+                                </p>
+                                <p class="email">
+                                    <i class="fas fa-envelope-square"></i> Email :[[${offre.poster.email} ]]
+
+                                </p>
+
+                                <p class="description">
+                                    Description : [[ ${offre.description} ]]
+                                </p>
+                                <a  th:if="${ offre.poster.email== #authentication.getPrincipal().Username}" th:href="@{/offre/modify(id= ${offre.id} )}" class="btn btn-success"> <i class="fas fa-pen"></i> </a>
+
+                                <!--{% if offre.user_id == request.user %}
+                                <a href=" {% url 'delete offre' pk=offre.id %} " class="btn btn-danger"> <i class="fas fa-trash"></i> Delete Offre</a>
+                                {% endif %}-->
+                            </div>
+                        </div>
+                        <div class="widget-49-meeting-action"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

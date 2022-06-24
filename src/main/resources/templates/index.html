@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head >
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@1&display=swap');
+        body { font-family: 'Roboto Condensed', sans-serif; background-color: #f1f1f1;}
+        .navbar { background-color: #484848 !important; color:#fbc531 ; z-index: 99;position: static;}
+        .navbar .navbar-nav .nav-link { color: #fff; }
+        .navbar .navbar-nav .nav-link:hover { color: #fbc531; }
+        .navbar .navbar-nav .active > .nav-link { color: #fbc531; }
+
+        footer a.text-light:hover { color: #fed136!important; text-decoration: none; }
+        footer .cizgi { border-right: 1px solid #484848 !important; }
+        footer .jumbotron {  background-color: #484848 !important; }
+        footer .bg-secondary { background-color: #484848 !important; }
+
+      .card-header{
+        background-color: #dfdfdf;
+      }
+      .solu_title{
+        margin-bottom: 3px;
+      }
+      .solu_title h3{
+      color: #000000 !important;
+      font-size: 21px;
+      }
+      .solu_descriptin{
+        height: 33px;
+        padding: 2px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .solu_descriptin span{
+        color: #b1b1b1!important;
+        font-size: 15px;
+
+      }
+      .card-i{
+        border-radius: 6px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      }
+      .footer-card{
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+      }
+      .pub-date{
+        font-size: 14px;
+        color: gray;
+      }
+
+
+    </style>
+
+    <title>Titre </title>
+</head>
+<body>
+    <header>
+    <nav class="navbar navbar-expand-lg navv  ">
+        <div class="container">
+            <a class="navbar-brand text-white" th:href="@{/}"><i class="fad fa-user-hard-hat fa-2x mr-2"></i> !CHOMEUR</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nvbCollapse" aria-controls="nvbCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nvbCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item  pl-1"  sec:authorize="hasAuthority('ADMIN')"  >
+                        <a class="nav-link" th:href="@{/admin}"><i class="fa fa-th-list fa-fw mr-1"></i>Dashboard</a>
+                    </li>
+
+                    <li class="nav-item  pl-1" sec:authorize="isAnonymous()" >
+                        <a class="nav-link" href="#"><i class="fas fa-user-plus"></i> s'inscrire</a>
+                    </li>
+                    <li class="nav-item pl-1" sec:authorize="isAnonymous()" >
+                        <a class="nav-link" href="#"><i class="fas fa-sign-in"></i></i> Connexion </a>
+                    </li>
+                    <li class="nav-item pl-1" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" href="#"><i class="fas fa-user"></i> <span th:text="${#authentication.getPrincipal().Username}" ></span></a>
+                    </li>
+
+                    <li class="nav-item pl-1" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out"></i></i> Deconnexion</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        <div class="container" >
+            <div  layout:fragment="content" >
+
+            </div>
+        </div>
+
+    <footer >
+    <div class="jumbotron jumbotron-fluid  p-4 mt-5 mb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 cizgi">
+                    <div class="card bg-secondary border-0">
+                        <div class="card-body text-light text-center">
+                            <h5 class="card-title text-white display-4" style="font-size:30px">Tous droits réservés</h5>
+                            <p class="d-inline lead">Walim Yafout © 2021<br>
+                                <a href="#" class="text-light d-block lead">0 CHOMAGE</a>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
+                    <div class="card bg-secondary border-0">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-white display-4" style="font-size:30px">Contactez-nous</h5>
+                            <a class="text-light d-block lead" style="margin-left: -20px" href="#"><i class="fa fa-phone mr-2"></i>+90 (000) 000 0 000</a>
+                            <a class="text-light d-block lead" href="#"><i class="fa fa-envelope mr-2"></i>admin@localhost.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
+                    <div class="card bg-secondary border-0">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-white display-4" style="font-size:30px">Réseaux sociaux</h5>
+
+                            <a class="text-light pl-2" href="www.facebook.com"><i class="fab fa-facebook"></i></a>
+
+                            <a class="text-light pl-2" href="#"><i class="fab fa-twitter"></i></a>
+
+                            <a class="text-light pl-2" href="#"><i class="fab fa-instagram"></i></a>
+
+                            <a class="text-light pl-2" href="#"><i class="fab fa-linkedin"></i></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

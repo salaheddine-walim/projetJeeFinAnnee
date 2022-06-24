@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="index"
+>
+<head >
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+    * {
+		box-sizing: border-box;
+	}
+
+
+	.rec-prism {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		transform-style: preserve-3d;
+		transform: translateZ(-100px);
+		transition: transform 0.5s ease-in;
+	}
+
+	.face {
+        margin: auto;
+        bottom: 90%;
+        width: 322px;
+        height: 398px;
+        padding: 20px;
+        background: rgba(250, 250, 250, 0.96);
+        border: 2px solid #484848ad;
+        border-radius: 3px;
+	}
+
+	.face .content {
+		color: #666;
+	}
+
+	.face .content h2 {
+		font-size: 30px;
+		text-align: center;
+		color: #f3c52f;
+	}
+
+	.face .content .field-wrapper {
+		margin-top: 30px;
+		position: relative;
+	}
+
+	.face .content .field-wrapper label {
+		position: absolute;
+		pointer-events: none;
+		font-size: 0.85em;
+		top: 40%;
+		left: 0;
+		transform: translateY(-50%);
+		transition: all ease-in 0.25s;
+		color: #999;
+	}
+
+	.face .content .field-wrapper input[type="text"],
+	.face .content .field-wrapper input[type="password"],
+	.face .content .field-wrapper input[type="submit"],
+	.face .content .field-wrapper textarea {
+		-webkit-appearance: none;
+		appearance: none;
+	}
+
+	.face .content .field-wrapper input[type="text"]:focus,
+	.face .content .field-wrapper input[type="password"]:focus,
+	.face .content .field-wrapper input[type="submit"]:focus,
+	.face .content .field-wrapper textarea:focus {
+		outline: none;
+	}
+
+	.face .content .field-wrapper input[type="text"],
+	.face .content .field-wrapper input[type="password"],
+	.face .content .field-wrapper textarea {
+		width: 100%;
+		border: none;
+		background: transparent;
+		line-height: 2em;
+		border-bottom: 1px solid #484848;
+		color: #666;
+	}
+
+	.face .content .field-wrapper input[type="text"]::-webkit-input-placeholder,
+	.face .content .field-wrapper input[type="password"]::-webkit-input-placeholder,
+	.face .content .field-wrapper textarea::-webkit-input-placeholder {
+		opacity: 0;
+	}
+
+	.face .content .field-wrapper input[type="text"]::-moz-placeholder,
+	.face .content .field-wrapper input[type="password"]::-moz-placeholder,
+	.face .content .field-wrapper textarea::-moz-placeholder {
+		opacity: 0;
+	}
+
+	.face .content .field-wrapper input[type="text"]:-ms-input-placeholder,
+	.face .content .field-wrapper input[type="password"]:-ms-input-placeholder,
+	.face .content .field-wrapper textarea:-ms-input-placeholder {
+		opacity: 0;
+	}
+
+	.face .content .field-wrapper input[type="text"]:-moz-placeholder,
+	.face .content .field-wrapper input[type="password"]:-moz-placeholder,
+	.face .content .field-wrapper textarea:-moz-placeholder {
+		opacity: 0;
+	}
+
+	.face .content .field-wrapper input[type="text"]:focus+label,
+	.face .content .field-wrapper input[type="password"]:focus+label,
+	.face .content .field-wrapper textarea:focus+label,
+	.face .content .field-wrapper input[type="text"]:not(:placeholder-shown)+label,
+	.face .content .field-wrapper input[type="password"]:not(:placeholder-shown)+label,
+	.face .content .field-wrapper textarea:not(:placeholder-shown)+label {
+		top: -35%;
+		color: #42509e;
+	}
+
+	.face .content .field-wrapper input[type="submit"] {
+		-webkit-appearance: none;
+		appearance: none;
+		cursor: pointer;
+		width: 100%;
+		background: #f3c52fd4;
+		line-height: 2em;
+		color: #fff;
+		border: 1px solid #d39e00;
+		border-radius: 3px;
+		padding: 5px;
+	}
+
+	.face .content .field-wrapper input[type="submit"]:hover {
+		opacity: 0.9;
+	}
+
+	.face .content .field-wrapper input[type="submit"]:active {
+		transform: scale(0.96);
+	}
+
+	.face .content .field-wrapper textarea {
+		resize: none;
+		line-height: 1em;
+	}
+
+	.face .content .field-wrapper textarea:focus+label,
+	.face .content .field-wrapper textarea:not(:placeholder-shown)+label {
+		top: -25%;
+	}
+
+
+
+	.face .thank-you-msg {
+		position: absolute;
+		width: 200px;
+		height: 130px;
+		text-align: center;
+		font-size: 2em;
+		color: #07ad90;
+		left: 50%;
+		top: 50%;
+		-webkit-transform: translate(-50%, -50%);
+	}
+
+	.face .thank-you-msg:after {
+		position: absolute;
+		content: "";
+		width: 50px;
+		height: 25px;
+		border: 10px solid #07ad90;
+		border-right: 0;
+		border-top: 0;
+		left: 50%;
+		top: 50%;
+		-webkit-transform: translate(-50%, -50%) rotate(0deg) scale(0);
+		transform: translate(-50%, -50%) rotate(0deg) scale(0);
+		-webkit-animation: success ease-in 0.15s forwards;
+		animation: success ease-in 0.15s forwards;
+		animation-delay: 2.5s;
+	}
+
+	.face-front {
+		transform: rotateY(0deg) translateZ(125px);
+	}
+
+	.face-top {
+		height: 250px;
+		transform: rotateX(90deg) translateZ(125px);
+	}
+
+	.face-back {
+		transform: rotateY(180deg) translateZ(125px);
+	}
+
+	.face-right {
+		transform: rotateY(90deg) translateZ(125px);
+	}
+
+	.face-left {
+		transform: rotateY(-90deg) translateZ(125px);
+	}
+
+	.face-bottom {
+		height: 250px;
+		transform: rotateX(-90deg) translateZ(225px);
+	}
+
+	.nav {
+		margin: 20px 0;
+		padding: 0;
+	}
+
+	.nav li {
+		display: inline-block;
+		list-style-type: none;
+		font-size: 1em;
+		margin: 0 10px;
+		color: #42509e;
+		position: relative;
+		cursor: pointer;
+	}
+
+	.nav li:after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 20px;
+		border-bottom: 1px solid #42509e;
+		transition: all ease-in 0.25s;
+	}
+
+	.nav li:hover:after {
+		width: 100%;
+	}
+
+	.psw,
+	.signup,
+	.singin {
+		display: block;
+		margin: 20px 0;
+		font-size: 0.75em;
+		text-align: center;
+		color: #42509e;
+		cursor: pointer;
+	}
+
+	small {
+		font-size: 0.7em;
+	}
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@1&display=swap');
+        body { font-family: 'Roboto Condensed', sans-serif; background-color: #f1f1f1;}
+        .navbar { background-color: #484848 !important; color:#fbc531 ; z-index: 99;position: static;}
+        .navbar .navbar-nav .nav-link { color: #fff; }
+        .navbar .navbar-nav .nav-link:hover { color: #fbc531; }
+        .navbar .navbar-nav .active > .nav-link { color: #fbc531; }
+
+        footer a.text-light:hover { color: #fed136!important; text-decoration: none; }
+        footer .cizgi { border-right: 1px solid #484848 !important; }
+        footer .jumbotron {  background-color: #484848 !important; }
+        footer .bg-secondary { background-color: #484848 !important; }
+
+
+    </style>
+
+    <title>Ajouter Offre</title>
+</head>
+<body>
+<div layout:fragment="content" >
+    <div class="container p-4 ">
+        <form method="POST" enctype="multipart/form-data" th:action="@{/add_offre}"  >
+            <div class="face face-front">
+                <div class="content">
+                    <h2>Ajouter Offre</h2>
+                    <div class="field-wrapper">
+                        <input type="text" name="titre" placeholder="Email" />
+                        <label>Titre</label>
+                    </div>
+                    <div class="field-wrapper">
+                        <input type="text" name="description" placeholder="Email" />
+                        <label>Description</label>
+                    </div>
+                    <div class="field-wrapper">
+                        <input type="text" name="domaine" placeholder="Email" />
+                        <label>Domaine</label>
+                    </div>
+                    <div class="field-wrapper">
+                        <input type="submit" value="Ajouter Offre" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>
+
